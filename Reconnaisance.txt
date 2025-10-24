@@ -1,0 +1,117 @@
+reconnaissance is a tactic that involves adversaries actively or passively gathering information to plan future targeted attacks. This information can include details about the victim's organization, infrastructure, or personnel, which is used to identify vulnerabilities and support other phases of an attack, such as initial access and discovery. 
+
+using a tool :1 httrack (website copier)
+           installation steps :
+              apt-get install httrack
+
+    here PoCs of httrack 
+    we are going to use it on mutillidae as it be used for security practices legally !
+            
+              ┌──(kali㉿kali)-[~]
+└─$ httrack
+
+Welcome to HTTrack Website Copier (Offline Browser) 3.49-6
+Copyright (C) 1998-2017 Xavier Roche and other contributors
+To see the option list, enter a blank line or try httrack --help
+
+Enter project name :example1
+
+Base path (return=/home/kali/websites/) :ex/mutilidae/
+
+Enter URLs (separated by commas or blank spaces) :http://192.168.xx.xx/mutillidae/
+
+Action:
+(enter) 1       Mirror Web Site(s)
+        2       Mirror Web Site(s) with Wizard
+        3       Just Get Files Indicated
+        4       Mirror ALL links in URLs (Multiple Mirror)
+        5       Test Links In URLs (Bookmark Test)
+        0       Quit
+: 1
+
+Proxy (return=none) :1
+
+Proxy port (return=8080) :8080
+
+You can define wildcards, like: -*.gif +www.*.com/*.zip -*img_*.zip
+Wildcards (return=none) :none
+
+You can define additional options, such as recurse level (-r<number>), separated by blank spaces
+To see the option list, type help
+Additional options (return=none) :none
+
+---> Wizard command line: httrack http://192.168.xx.xx/mutillidae/  -O "ex/mutilidae/example1" -P 1:8080  -%v none  none
+
+Ready to launch the mirror? (Y/n) :Y
+
+Mirror launched on Fri, 24 Oct 2025 13:21:19 by HTTrack Website Copier/3.49-6 [XR&CO'2014]
+mirroring http://192.168.xx.xx/mutillidae/ none none with the wizard help..
+Done.
+
+-----------------------------------------------------------------------------------------------------------------------
+
+    GOOGLE DIRECTIVES 
+
+    now lets see Google Directives (its a techinque to extract information from google index) and it is also known as Google Dorking
+     
+     to properly use it
+     1. name of directive 
+     2.colon
+     3.term 
+
+     Directives like : site: ,intitle: ,inurl: , cache: ,filetype: or etc 
+     ex- site:dsu.edu filetype:pdf 
+
+note  : ExploitDb can be useful for reviewing google dorking and additional techniques related to it
+
+------------------------------------------------------------------------------------------------------------------------
+
+   THE HARVESTER
+
+   now TheHarvester : discoverying and leveraging email address
+   allows to quickly and accurately catalog both email address and subdomains that related to target 
+   can found it on kali : /usr/bin/ 
+   to use it 
+
+   ./theharvester.py -d (target website) -l (limit to no of results) -b (pubilc repository (google,bing,PGP servers etc))
+    
+    can also use (-b all)
+-------------------------------------------------------------------------------------------------------------------------
+
+    whois : tells specific info about our target include Ip address ,host names of company DNS servers and Contact info 
+    alternative of whois : whois.net a web based lookup tool
+-------------------------------------------------------------------------------------------------------------------------
+  NETCRAFT : https://news.netcraft.com 
+-------------------------------------------------------------------------------------------------------------------------
+  HOST 
+  to translate domain name or target hostname into an IP address and can be vice versa 
+  ex - host ns1.dd.com or host 192.168.xx.xx 
+  -----------------------------------------------------------------------------------------------------------------------
+  NSlookup 
+  to query DNS servers and potentially obtain records about various Hosts of which it is aware of 
+
+  ex- nslookup google.com 
+  -----------------------------------------------------------------------------------------------------------------------
+  Dig 
+  extract info from DNS 
+  dig@target_ip
+  
+  dig makes it simple to attempt a zone transfer (to pull multiple records from DNS server)
+  -----------------------------------------------------------------------------------------------------------------------
+  Fierce 
+  provide dozens of additional targets 
+  ./fierce.pl -dns target.com   (Directory loc - /usr/bin)
+  it will brute force hostnames by send a series of queries to target DNS server 
+
+  to install - apt-get install fierce 
+  -----------------------------------------------------------------------------------------------------------------------
+  METAGOOFIL
+  data about data - metadata
+  ./metagoofil.py -d target-hostname pdf.doc.xls.pptx -n 20 -o files -f results.html 
+  -----------------------------------------------------------------------------------------------------------------------
+  THREAT AGENT 
+  attack of drones 
+  -----------------------------------------------------------------------------------------------------------------------
+  now we have all basic tools to generate a list of ip addresses and we have done recon and with good documentation process,proper use of tools
+  and practice = recon master or information gathering mastered 
+  
